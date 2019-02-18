@@ -120,11 +120,11 @@ function! ag#Ag(cmd, args)
       catch
         echom 'Failed to change directory to:'.l:cwd
       finally
-        silent! execute a:cmd . " " . escape(l:grepargs, '|')
+        silent! execute "AsyncRun! ag" . " " . escape(l:grepargs, '|')
         exe "lcd ".l:cwd_back
       endtry
     else " Someone chose an undefined value or 'c' so we revert to the default
-      silent! execute a:cmd . " " . escape(l:grepargs, '|')
+      silent! execute "AsyncRun! ag" . " " . escape(l:grepargs, '|')
     endif
   finally
     let &grepprg=l:grepprg_bak
